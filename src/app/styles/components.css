@@ -1,0 +1,9 @@
+@layer components {
+  .focus-ring {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-stroke bg-card transition-colors duration-200 hover:border-stroke-accent;
+  }
+}

@@ -11,3 +11,5 @@ npm-debug.log*
 coverage
 .idea
 .vite
+.playwright-mcp
+.vscode

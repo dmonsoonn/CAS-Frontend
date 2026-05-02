@@ -1,0 +1,56 @@
+@theme {
+  --font-jura: 'Jura', sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+  --font-unbounded: 'Unbounded', sans-serif;
+
+  --color-base: #0e0d19;
+  --color-card: #1a1f33;
+  --color-input: #2c3148;
+
+  --color-primary: #f5f5f5;
+  --color-secondary: #8a8fa8;
+  --color-muted: #6b7094;
+
+  --color-accent: #8b92e8;
+  --color-gradient-start: #3a3f8f;
+  --color-gradient-end: #522758;
+
+  --color-success: #6fcf8e;
+  --color-error: #e87a7a;
+
+  --color-stroke: rgba(245, 245, 245, 0.1);
+  --color-stroke-accent: rgba(110, 80, 160, 0.45);
+
+  --text-display: 64px;
+  --text-display--line-height: 68px;
+  --text-display--letter-spacing: -2px;
+
+  --text-h1: 42px;
+  --text-h1--line-height: 48px;
+
+  --text-h2: 32px;
+  --text-h2--line-height: 38px;
+
+  --text-h3: 28px;
+  --text-h3--line-height: 34px;
+
+  --text-h4: 22px;
+  --text-h4--line-height: 28px;
+
+  --text-eyebrow: 13px;
+  --text-eyebrow--line-height: 19.5px;
+  --text-eyebrow--letter-spacing: 1.3px;
+
+  --text-label: 13px;
+  --text-label--line-height: 20px;
+  --text-label--letter-spacing: 1.3px;
+
+  --text-body-l: 16px;
+  --text-body-l--line-height: 26px;
+
+  --text-body-m: 15px;
+  --text-body-m--line-height: 24px;
+
+  --text-caption: 13px;
+  --text-caption--line-height: 20px;
+}
