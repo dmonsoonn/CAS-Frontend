@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@shared/ui/button';
 import { SelectField } from '@shared/ui/select-field';
 import {

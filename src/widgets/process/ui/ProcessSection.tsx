@@ -1,3 +1,4 @@
+import { Container } from '@shared/ui/container';
 import { SectionHeading } from '@shared/ui/section-heading';
 import { steps } from '../model/steps.data';
 import { StepCard } from './StepCard';
@@ -5,7 +6,7 @@ import { formatNumber } from '@shared/lib';
 
 export function ProcessSection() {
   return (
-    <section aria-labelledby="process-heading" className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 px-8">
+    <Container as="section" aria-labelledby="process-heading" className="flex flex-col gap-8">
       <SectionHeading eyebrow="Процесс" title="Как это работает" id="process-heading" />
 
       <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -15,6 +16,6 @@ export function ProcessSection() {
           </li>
         ))}
       </ol>
-    </section>
+    </Container>
   );
 }

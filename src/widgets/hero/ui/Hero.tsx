@@ -1,18 +1,19 @@
 import { ArrowRight } from 'lucide-react';
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
+import { Container } from '@shared/ui/container';
 import { Text } from '@shared/ui/typography';
 
 export function Hero() {
   return (
-    <section className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-8 text-center">
+    <Container as="section" className="flex flex-col items-center gap-6 text-center">
       <Badge>ИИ-симулятор технического интервью</Badge>
 
-      <h1 className="font-jura font-medium text-primary text-display-sm sm:text-display-md md:text-display">
+      <Text variant="display-hero" tone="primary" as="h1">
         Подготовься к собеседованию в ИТ
         <br />
         <span className="text-accent">с помощью ИИ</span>
-      </h1>
+      </Text>
 
       <Text variant="body-l" tone="secondary" as="p" className="max-w-[570px]">
         Пройдите интервью в формате реального отбора и получите объективную оценку своей подготовки
@@ -27,6 +28,6 @@ export function Hero() {
           Как это работает
         </Button>
       </div>
-    </section>
+    </Container>
   );
 }

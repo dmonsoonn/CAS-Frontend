@@ -2,6 +2,7 @@ import type { ElementType, ReactNode, HTMLAttributes } from 'react';
 
 export type TextVariant =
   | 'display'
+  | 'display-hero'
   | 'h1'
   | 'h2'
   | 'h3'
@@ -20,6 +21,7 @@ export type TextTone = 'primary' | 'secondary' | 'muted' | 'accent';
 
 const variantClasses: Record<TextVariant, string> = {
   display: 'font-jura font-bold text-display',
+  'display-hero': 'font-jura font-medium text-display-sm sm:text-display-md md:text-display',
   h1: 'font-jura font-bold text-h1',
   h2: 'font-jura font-bold text-h2',
   h3: 'font-jura font-bold text-h3',

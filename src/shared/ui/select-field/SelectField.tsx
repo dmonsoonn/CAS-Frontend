@@ -1,4 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { Text } from '@shared/ui/typography';
 
 export type SelectOption = {
@@ -48,33 +49,31 @@ export function SelectField({
       ? getOptionId(highlightedIndex)
       : undefined;
 
-  const updateDropDirection = () => {
-    const button = buttonRef.current;
-    if (!button) return;
-    const rect = button.getBoundingClientRect();
-    const spaceBelow = window.innerHeight - rect.bottom;
-    const spaceAbove = rect.top;
-    const contentHeight = Math.min(
-      options.length * DROPDOWN_OPTION_HEIGHT + DROPDOWN_BORDER,
-      DROPDOWN_MAX_HEIGHT,
-    );
-    const required = contentHeight + DROPDOWN_GAP;
-    setDropDirection(
-      spaceBelow < required && spaceAbove > spaceBelow ? 'up' : 'down',
-    );
-  };
-
   useLayoutEffect(() => {
     if (!isOpen) return;
-    updateDropDirection();
-    const handle = () => updateDropDirection();
-    window.addEventListener('resize', handle);
-    window.addEventListener('scroll', handle, true);
-    return () => {
-      window.removeEventListener('resize', handle);
-      window.removeEventListener('scroll', handle, true);
+    const update = () => {
+      const button = buttonRef.current;
+      if (!button) return;
+      const rect = button.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const contentHeight = Math.min(
+        options.length * DROPDOWN_OPTION_HEIGHT + DROPDOWN_BORDER,
+        DROPDOWN_MAX_HEIGHT,
+      );
+      const required = contentHeight + DROPDOWN_GAP;
+      setDropDirection(
+        spaceBelow < required && spaceAbove > spaceBelow ? 'up' : 'down',
+      );
     };
-  }, [isOpen]);
+    update();
+    window.addEventListener('resize', update);
+    window.addEventListener('scroll', update, true);
+    return () => {
+      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', update, true);
+    };
+  }, [isOpen, options.length]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -93,10 +92,6 @@ export function SelectField({
       optionRefs.current[highlightedIndex]?.scrollIntoView({ block: 'nearest' });
     }
   }, [isOpen, highlightedIndex]);
-
-  useEffect(() => {
-    optionRefs.current.length = options.length;
-  }, [options.length]);
 
   const open = () => {
     if (disabled || options.length === 0) return;
@@ -135,6 +130,7 @@ export function SelectField({
       case 'Escape':
         event.preventDefault();
         close();
+        buttonRef.current?.focus();
         break;
       case 'ArrowDown':
         event.preventDefault();
@@ -187,12 +183,12 @@ export function SelectField({
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
-          aria-controls={listboxId}
+          aria-controls={isOpen ? listboxId : undefined}
           aria-labelledby={labelId}
           aria-activedescendant={activeOptionId}
           className={
-            'flex h-[58px] w-full items-center justify-between gap-3 rounded-[14px] border border-stroke bg-input ' +
-            'px-[25px] font-manrope text-body-l text-primary ' +
+            'flex h-control w-full items-center justify-between gap-3 rounded-control border border-stroke bg-input ' +
+            'px-6 font-manrope text-body-l text-primary ' +
             'transition-colors duration-200 ' +
             'not-disabled:hover:border-primary/20 ' +
             'focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/35 ' +
@@ -202,14 +198,12 @@ export function SelectField({
           <span className="truncate text-left">
             {selectedOption ? selectedOption.label : placeholder}
           </span>
-          <img
-            src="/arrow.svg"
-            alt=""
-            width={20}
-            height={20}
+          <ChevronDown
+            size={20}
+            strokeWidth={2}
             aria-hidden="true"
             className={
-              'h-5 w-5 shrink-0 transition-transform duration-200 ' +
+              'shrink-0 text-secondary transition-transform duration-200 ' +
               (isOpen ? 'rotate-180' : '')
             }
           />
@@ -227,7 +221,7 @@ export function SelectField({
             }}
             className={
               'absolute left-0 right-0 z-20 overflow-y-auto ' +
-              'rounded-[14px] border border-stroke bg-card ' +
+              'rounded-control border border-stroke bg-card ' +
               'shadow-[0_12px_32px_-8px_rgba(0,0,0,0.6)] ' +
               (dropDirection === 'up' ? 'bottom-full' : 'top-full')
             }

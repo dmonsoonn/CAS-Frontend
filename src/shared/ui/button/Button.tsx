@@ -8,8 +8,8 @@ type ButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const baseClasses =
-  'inline-flex h-[58px] items-center justify-center rounded-[14px] px-7 ' +
-  'font-manrope text-body-l font-medium will-change-transform ' +
+  'inline-flex h-control items-center justify-center rounded-control px-7 ' +
+  'font-manrope text-body-l font-medium ' +
   'focus-ring active:scale-[0.98] active:duration-100 ' +
   'disabled:cursor-not-allowed disabled:opacity-50';
 
@@ -25,11 +25,17 @@ const variantClasses: Record<ButtonVariant, string> = {
     'hover:border-primary/25 hover:text-primary',
 };
 
-export function Button({ children, variant = 'primary', className = '', ...rest }: ButtonProps) {
+export function Button({
+  children,
+  variant = 'primary',
+  className = '',
+  type = 'button',
+  ...rest
+}: ButtonProps) {
   return (
     <button
-      type="button"
       {...rest}
+      type={type}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`.trim()}
     >
       {children}

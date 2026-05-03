@@ -1,10 +1,12 @@
 import { Logo } from '@shared/ui/logo';
+import { Container } from '@shared/ui/container';
 
 export function Header() {
   return (
-    <header
+    <Container
+      as="header"
       className="
-        relative mx-auto flex h-[84px] w-full max-w-[1136px] items-center justify-between
+        relative flex h-[84px] items-center justify-between
         rounded-2xl border border-stroke-accent px-6
         shadow-[0_0_11px_rgba(80,55,140,0.35),inset_0_0_16px_rgba(80,55,140,0.08)]
       "
@@ -33,6 +35,6 @@ export function Header() {
           Войти
         </a>
       </nav>
-    </header>
+    </Container>
   );
 }

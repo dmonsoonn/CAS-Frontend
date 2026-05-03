@@ -8,10 +8,10 @@ import { Footer } from '@widgets/footer';
 export function HomePage() {
   return (
     <div className="flex min-h-screen flex-col bg-base">
-      <div className="flex flex-1 flex-col items-center gap-16 px-4 pb-16 pt-6 sm:px-6">
+      <div className="flex flex-1 flex-col gap-16 px-4 pb-16 pt-6 sm:px-6">
         <Header />
 
-        <main className="flex w-full flex-col items-center gap-16">
+        <main className="flex flex-col gap-16">
           <Hero />
           <FeaturesSection />
           <ProcessSection />
