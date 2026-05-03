@@ -1,5 +1,4 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { ChevronDown } from 'lucide-react';
 import { Text } from '@shared/ui/typography';
 
 export type SelectOption = {
@@ -45,9 +44,7 @@ export function SelectField({
   const selectedOption = selectedIndex >= 0 ? options[selectedIndex] : null;
   const getOptionId = (index: number) => `${listboxId}-option-${index}`;
   const activeOptionId =
-    isOpen && highlightedIndex >= 0 && highlightedIndex < options.length
-      ? getOptionId(highlightedIndex)
-      : undefined;
+    isOpen && highlightedIndex >= 0 && highlightedIndex < options.length ? getOptionId(highlightedIndex) : undefined;
 
   useLayoutEffect(() => {
     if (!isOpen) return;
@@ -57,14 +54,9 @@ export function SelectField({
       const rect = button.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
-      const contentHeight = Math.min(
-        options.length * DROPDOWN_OPTION_HEIGHT + DROPDOWN_BORDER,
-        DROPDOWN_MAX_HEIGHT,
-      );
+      const contentHeight = Math.min(options.length * DROPDOWN_OPTION_HEIGHT + DROPDOWN_BORDER, DROPDOWN_MAX_HEIGHT);
       const required = contentHeight + DROPDOWN_GAP;
-      setDropDirection(
-        spaceBelow < required && spaceAbove > spaceBelow ? 'up' : 'down',
-      );
+      setDropDirection(spaceBelow < required && spaceAbove > spaceBelow ? 'up' : 'down');
     };
     update();
     window.addEventListener('resize', update);
@@ -114,12 +106,7 @@ export function SelectField({
     if (disabled) return;
 
     if (!isOpen) {
-      if (
-        event.key === 'ArrowDown' ||
-        event.key === 'ArrowUp' ||
-        event.key === 'Enter' ||
-        event.key === ' '
-      ) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         open();
       }
@@ -164,10 +151,7 @@ export function SelectField({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={'flex flex-col gap-2 ' + (disabled ? 'opacity-40' : '')}
-    >
+    <div ref={containerRef} className={'flex flex-col gap-2 ' + (disabled ? 'opacity-40' : '')}>
       <Text variant="label" tone="muted" as="span" id={labelId}>
         {label}
       </Text>
@@ -195,17 +179,14 @@ export function SelectField({
             'disabled:cursor-not-allowed'
           }
         >
-          <span className="truncate text-left">
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
-          <ChevronDown
-            size={20}
-            strokeWidth={2}
+          <span className="truncate text-left">{selectedOption ? selectedOption.label : placeholder}</span>
+          <img
+            src="/arrow.svg"
+            alt=""
+            width={20}
+            height={20}
             aria-hidden="true"
-            className={
-              'shrink-0 text-secondary transition-transform duration-200 ' +
-              (isOpen ? 'rotate-180' : '')
-            }
+            className={'h-5 w-5 shrink-0 transition-transform duration-200 ' + (isOpen ? 'rotate-180' : '')}
           />
         </button>
 

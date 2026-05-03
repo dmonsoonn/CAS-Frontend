@@ -1,5 +1,4 @@
-import { useState, type FormEvent } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useState, type SubmitEvent } from 'react';
 import { Button } from '@shared/ui/button';
 import { SelectField } from '@shared/ui/select-field';
 import {
@@ -36,7 +35,7 @@ export function InterviewSetupForm() {
     setGrade('');
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
