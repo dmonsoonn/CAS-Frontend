@@ -42,6 +42,11 @@ export function SelectField({
 
   const selectedIndex = options.findIndex((opt) => opt.value === value);
   const selectedOption = selectedIndex >= 0 ? options[selectedIndex] : null;
+  const getOptionId = (index: number) => `${listboxId}-option-${index}`;
+  const activeOptionId =
+    isOpen && highlightedIndex >= 0 && highlightedIndex < options.length
+      ? getOptionId(highlightedIndex)
+      : undefined;
 
   const updateDropDirection = () => {
     const button = buttonRef.current;
@@ -88,6 +93,10 @@ export function SelectField({
       optionRefs.current[highlightedIndex]?.scrollIntoView({ block: 'nearest' });
     }
   }, [isOpen, highlightedIndex]);
+
+  useEffect(() => {
+    optionRefs.current.length = options.length;
+  }, [options.length]);
 
   const open = () => {
     if (disabled || options.length === 0) return;
@@ -171,19 +180,21 @@ export function SelectField({
         <button
           ref={buttonRef}
           type="button"
+          role="combobox"
           id={buttonId}
           disabled={disabled}
           onClick={() => (isOpen ? close() : open())}
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
-          aria-controls={isOpen ? listboxId : undefined}
+          aria-controls={listboxId}
           aria-labelledby={labelId}
+          aria-activedescendant={activeOptionId}
           className={
             'flex h-[58px] w-full items-center justify-between gap-3 rounded-[14px] border border-stroke bg-input ' +
             'px-[25px] font-manrope text-body-l text-primary ' +
             'transition-colors duration-200 ' +
-            'hover:border-primary/20 ' +
+            'not-disabled:hover:border-primary/20 ' +
             'focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/35 ' +
             'disabled:cursor-not-allowed'
           }
@@ -210,16 +221,21 @@ export function SelectField({
             role="listbox"
             aria-labelledby={labelId}
             tabIndex={-1}
+            style={{
+              maxHeight: DROPDOWN_MAX_HEIGHT,
+              [dropDirection === 'up' ? 'marginBottom' : 'marginTop']: DROPDOWN_GAP,
+            }}
             className={
-              'absolute left-0 right-0 z-20 max-h-[280px] overflow-y-auto ' +
+              'absolute left-0 right-0 z-20 overflow-y-auto ' +
               'rounded-[14px] border border-stroke bg-card ' +
               'shadow-[0_12px_32px_-8px_rgba(0,0,0,0.6)] ' +
-              (dropDirection === 'up' ? 'bottom-full mb-2' : 'top-full mt-2')
+              (dropDirection === 'up' ? 'bottom-full' : 'top-full')
             }
           >
             {options.map((opt, index) => (
               <li
                 key={opt.value}
+                id={getOptionId(index)}
                 ref={(el) => {
                   optionRefs.current[index] = el;
                 }}
@@ -227,8 +243,9 @@ export function SelectField({
                 aria-selected={opt.value === value}
                 onClick={() => select(opt)}
                 onMouseEnter={() => setHighlightedIndex(index)}
+                style={{ height: DROPDOWN_OPTION_HEIGHT }}
                 className={
-                  'flex h-[54px] cursor-pointer items-center px-6 font-manrope text-body-m text-primary ' +
+                  'flex cursor-pointer items-center px-6 font-manrope text-body-m text-primary ' +
                   'transition-colors duration-150 ' +
                   (highlightedIndex === index ? 'bg-input ' : '')
                 }

@@ -1,24 +1,25 @@
 import { Text } from '@shared/ui/typography';
-import type { ProductFeature } from '../model/types';
+import type { NumberedItem } from '@shared/types';
 
 type FeatureCardProps = {
-  feature: ProductFeature;
+  item: NumberedItem;
+  number: string;
 };
 
-export function FeatureCard({ feature }: FeatureCardProps) {
+export function FeatureCard({ item, number }: FeatureCardProps) {
   return (
     <article className="card-surface flex flex-col gap-4 p-8">
-      <div className="flex items-start justify-between gap-4">
-        <Text variant="strong" tone="primary" as="h3">
-          {feature.title}
+      <div className="flex h-[28px] items-center justify-between gap-4">
+        <Text variant="strong-xl" tone="primary" as="h3">
+          {item.title}
         </Text>
-        <Text variant="h3" tone="accent" className="opacity-70">
-          {feature.number}
+        <Text variant="h3" tone="accent" className="leading-[28px] opacity-70">
+          {number}
         </Text>
       </div>
       <span className="block h-px w-full bg-stroke" aria-hidden="true" />
       <Text variant="body-m" tone="muted" as="p">
-        {feature.description}
+        {item.description}
       </Text>
     </article>
   );

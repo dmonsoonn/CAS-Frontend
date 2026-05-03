@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { PrimaryButton } from '@shared/ui/primary-button';
+import { useState, type FormEvent } from 'react';
+import { Button } from '@shared/ui/button';
 import { SelectField } from '@shared/ui/select-field';
 import {
   sphereOptions,
@@ -35,7 +35,7 @@ export function InterviewSetupForm() {
     setGrade('');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
@@ -83,7 +83,7 @@ export function InterviewSetupForm() {
         />
       </div>
 
-      <PrimaryButton type="submit" disabled={!isReady} className="w-full font-bold">
+      <Button type="submit" variant="primary" disabled={!isReady} className="w-full font-bold">
         Перейти к тесту
         <img
           src="/arrow-sideways.svg"
@@ -93,7 +93,7 @@ export function InterviewSetupForm() {
           aria-hidden="true"
           className="h-4 w-4 shrink-0"
         />
-      </PrimaryButton>
+      </Button>
     </form>
   );
 }

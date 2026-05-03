@@ -22,8 +22,16 @@
   --color-stroke-accent: rgba(110, 80, 160, 0.45);
 
   --text-display: 64px;
-  --text-display--line-height: 68px;
+  --text-display--line-height: 1.0625;
   --text-display--letter-spacing: -2px;
+
+  --text-display-sm: 40px;
+  --text-display-sm--line-height: 1.05;
+  --text-display-sm--letter-spacing: -2px;
+
+  --text-display-md: 52px;
+  --text-display-md--line-height: 1.05;
+  --text-display-md--letter-spacing: -2px;
 
   --text-h1: 42px;
   --text-h1--line-height: 48px;
@@ -45,11 +53,20 @@
   --text-label--line-height: 20px;
   --text-label--letter-spacing: 1.3px;
 
+  --text-body-xl: 18px;
+  --text-body-xl--line-height: 28px;
+
   --text-body-l: 16px;
   --text-body-l--line-height: 26px;
 
+  --text-body-l-tight: 16px;
+  --text-body-l-tight--line-height: 20px;
+
   --text-body-m: 15px;
   --text-body-m--line-height: 24px;
+
+  --text-body-m-tight: 15px;
+  --text-body-m-tight--line-height: 22px;
 
   --text-caption: 13px;
   --text-caption--line-height: 20px;

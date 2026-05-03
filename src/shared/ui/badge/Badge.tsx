@@ -6,9 +6,9 @@ type BadgeProps = {
 
 export function Badge({ children }: BadgeProps) {
   return (
-    <span className="inline-flex h-[37.5px] items-center gap-2 rounded-full border border-accent/40 bg-accent/8 px-[17px] py-px">
+    <span className="inline-flex h-9 items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4">
       <span className="size-2 rounded-full bg-accent" aria-hidden="true" />
-      <span className="font-jura text-eyebrow font-normal text-accent tracking-[0.325px]">
+      <span className="font-jura text-eyebrow font-normal text-accent tracking-wide">
         {children}
       </span>
     </span>

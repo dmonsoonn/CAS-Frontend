@@ -11,7 +11,10 @@ export type TextVariant =
   | 'body-l'
   | 'body-m'
   | 'caption'
-  | 'strong';
+  | 'strong'
+  | 'strong-xl'
+  | 'strong-tight'
+  | 'body-tight';
 
 export type TextTone = 'primary' | 'secondary' | 'muted' | 'accent';
 
@@ -27,6 +30,9 @@ const variantClasses: Record<TextVariant, string> = {
   'body-m': 'font-manrope font-normal text-body-m',
   caption: 'font-manrope font-normal text-caption',
   strong: 'font-manrope font-bold text-body-l',
+  'strong-xl': 'font-manrope font-bold text-body-xl',
+  'strong-tight': 'font-manrope font-bold text-body-l-tight',
+  'body-tight': 'font-manrope font-normal text-body-m-tight',
 };
 
 const toneClasses: Record<TextTone, string> = {
